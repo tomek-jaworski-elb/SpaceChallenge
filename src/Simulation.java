@@ -1,14 +1,20 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Simulation {
     // class that is responsible for reading item data and filling up the rockets.
     private ArrayList<Item> allItems;
+    File f1 = new File("phase-1.txt");
+    File f2 = new File("phase-2.txt");
 
     Simulation() {
         allItems = new ArrayList();
+
     }
 
-    public ArrayList loadItem() {
+    public ArrayList loadItem() throws Exception {
         // this method loads all items from a text file and returns an ArrayList of Items:
         //Each line in the text file consists of the item name followed by = then its weigh in kg. For example:
         //habitat=100000
@@ -16,7 +22,18 @@ public class Simulation {
         //food=50000
         //loadItems should read the text file line by line and create an Item object for each and then add
         // it to an ArrayList of Items. The method should then return that ArrayList.
-
+        try {
+            Scanner scanner = new Scanner(f1);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                Item item = new Item();
+                item.setName("x");
+                item.setWeight(100);
+                allItems.add(item);
+            }
+        } catch (FileNotFoundException exception) {
+            exception.printStackTrace();
+        }
 
         return null;
     }
