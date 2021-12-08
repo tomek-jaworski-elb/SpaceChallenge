@@ -2,6 +2,12 @@ import java.util.ArrayList;
 
 public class Simulation {
     // class that is responsible for reading item data and filling up the rockets.
+    private ArrayList<Item> allItems;
+
+    Simulation() {
+        allItems = new ArrayList();
+    }
+
     public ArrayList loadItem() {
         // this method loads all items from a text file and returns an ArrayList of Items:
         //Each line in the text file consists of the item name followed by = then its weigh in kg. For example:
@@ -10,6 +16,8 @@ public class Simulation {
         //food=50000
         //loadItems should read the text file line by line and create an Item object for each and then add
         // it to an ArrayList of Items. The method should then return that ArrayList.
+
+
         return null;
     }
     public ArrayList loadU1() {
