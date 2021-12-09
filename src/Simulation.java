@@ -11,15 +11,16 @@ public class Simulation {
 
     Simulation() {
 
-        double costsU1, costsU2 = 0;
+        double costsU1=0;
+        double costsU2 = 0;
         // class that is responsible for reading item data and filling up the rockets.
         ArrayList<Item> allItemsPhase1 = loadItem(1);
         ArrayList<Item> allItemsPhase2 = loadItem(2);
-        System.out.println("------------ Rocket U1 loading -----------------");
+        System.out.println("------------ Rocket U1 loading Phase 1 ----------");
         ArrayList<Rocket> rocketU1Ph1 = loadU1(allItemsPhase1);
-        System.out.println("------------ Rocket U2 loading -----------------");
+        System.out.println("------------ Rocket U1 loading Phase 2 ----------");
         ArrayList<Rocket> rocketU1Ph2 = loadU1(allItemsPhase2);
-        System.out.println("------------------------------------------------");
+        System.out.println("-------------------------------------------------");
 
         //       loadU1(allItemsPhase1);
         //       loadU1(allItemsPhase2);
@@ -27,6 +28,19 @@ public class Simulation {
        costsU1 = runSimulation(rocketU1Ph1);
        costsU1 += runSimulation(rocketU1Ph2);
         System.out.println("Budget for U1: $" + (long) costsU1);
+
+        System.out.println("\n"+"------------ Rocket U2 loading Phase 1 ----------");
+        ArrayList<Rocket> rocketU2Ph1 = loadU2(allItemsPhase1);
+        System.out.println("------------ Rocket U2 loading Phase 1 ----------");
+        ArrayList<Rocket> rocketU2Ph2 = loadU2(allItemsPhase2);
+        System.out.println("------------------------------------------------");
+
+        //       loadU1(allItemsPhase1);
+        //       loadU1(allItemsPhase2);
+//        loadU2(allItemsPhase2);
+        costsU2 = runSimulation(rocketU2Ph1);
+        costsU2 += runSimulation(rocketU2Ph2);
+        System.out.println("Budget for U2: $" + (long) costsU2);
 
     }
 
@@ -142,7 +156,7 @@ public class Simulation {
             }
 
         }
-        System.out.println("Cost of Rockets U1: $" + ( long) rocketsCosts);
+        System.out.println("Cost of Rockets: $" + ( long) rocketsCosts);
 
         return rocketsCosts;
     }

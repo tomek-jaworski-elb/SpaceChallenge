@@ -1,6 +1,3 @@
-import javax.lang.model.util.ElementScanner6;
-import java.beans.PropertyEditorSupport;
-
 public class U1 extends Rocket {
 
     private final int costDollars = 100000000;
