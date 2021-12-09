@@ -11,8 +11,6 @@ public class Simulation {
 
     Simulation() {
 
-        double costsU1=0;
-        double costsU2 = 0;
         // class that is responsible for reading item data and filling up the rockets.
         ArrayList<Item> allItemsPhase1 = loadItem(1);
         ArrayList<Item> allItemsPhase2 = loadItem(2);
@@ -22,29 +20,26 @@ public class Simulation {
         ArrayList<Rocket> rocketU1Ph2 = loadU1(allItemsPhase2);
         System.out.println("-------------------------------------------------");
 
-        //       loadU1(allItemsPhase1);
-        //       loadU1(allItemsPhase2);
-//        loadU2(allItemsPhase2);
-       costsU1 = runSimulation(rocketU1Ph1);
-       costsU1 += runSimulation(rocketU1Ph2);
-        System.out.println("Budget for U1: $" + (long) costsU1);
+        double costsU1p1 = runSimulation(rocketU1Ph1);
+        double costsU1p2 = runSimulation(rocketU1Ph2);
+        //       System.out.println("Budget for U1: $" + (long) costsU1);
 
-        System.out.println("\n"+"------------ Rocket U2 loading Phase 1 ----------");
+        System.out.println("\n" + "------------ Rocket U2 loading Phase 1 ----------");
         ArrayList<Rocket> rocketU2Ph1 = loadU2(allItemsPhase1);
         System.out.println("------------ Rocket U2 loading Phase 1 ----------");
         ArrayList<Rocket> rocketU2Ph2 = loadU2(allItemsPhase2);
         System.out.println("------------------------------------------------");
 
-        //       loadU1(allItemsPhase1);
-        //       loadU1(allItemsPhase2);
-//        loadU2(allItemsPhase2);
-        costsU2 = runSimulation(rocketU2Ph1);
-        costsU2 += runSimulation(rocketU2Ph2);
-        System.out.println("Budget for U2: $" + (long) costsU2);
+        double costsU2p1 = runSimulation(rocketU2Ph1);
+        double costsU2p2 = runSimulation(rocketU2Ph2);
 
+        System.out.println("Budget for U1: $" + (long) (costsU1p1 + costsU1p2) + " (" + (long) costsU1p1
+                + ", " + (long) costsU1p2 + ")");
+        System.out.println("Budget for U2: $" + (long) (costsU2p1 + costsU2p2) + " (" + (long) costsU2p1
+                + ", " + (long) costsU2p2 + ")");
     }
 
-    private ArrayList loadItem(int phase) {
+    private ArrayList<Item> loadItem(int phase) {
         // this method loads all items from a text file and returns an ArrayList of Items:
         //Each line in the text file consists of the item name followed by = then its weigh in kg. For example:
         //habitat=100000
@@ -101,7 +96,7 @@ public class Simulation {
                 rocket.carry(i);
             }
 
-            System.out.println("Number of U1: " + String.valueOf(rocketArrayList.size() + 1)
+            System.out.println("Number of U1: " + (rocketArrayList.size() + 1)
                     + ", rocket cargo weight: " + rocket.getCurrentWeightKgs());
         }
 
@@ -126,7 +121,7 @@ public class Simulation {
                 rocket.carry(i);
             }
 
-            System.out.println("Number of U2: " + String.valueOf(rocketArrayList.size() + 1)
+            System.out.println("Number of U2: " + (rocketArrayList.size() + 1)
                     + ", rocket cargo weight: " + rocket.getCurrentWeightKgs());
         }
         return rocketArrayList;
@@ -149,14 +144,13 @@ public class Simulation {
             if (landOK && launchOK) {
                 System.out.println("Expedition succed!");
 
-            }
-            else {
+            } else {
                 System.out.println("Expedition failed!");
                 rocketsCosts += rocket.getCostDollars();
             }
 
         }
-        System.out.println("Cost of Rockets: $" + ( long) rocketsCosts);
+        System.out.println("Cost of Rockets: $" + (long) rocketsCosts);
 
         return rocketsCosts;
     }
