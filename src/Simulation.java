@@ -68,9 +68,7 @@ public class Simulation {
                     System.out.println("Wrong file format!");
                 }
             }
-        } catch (FileNotFoundException exception) {
-            exception.printStackTrace();
-        } catch (PatternSyntaxException exception) {
+        } catch (FileNotFoundException | PatternSyntaxException exception) {
             exception.printStackTrace();
         }
 
