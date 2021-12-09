@@ -5,20 +5,28 @@ import java.util.Scanner;
 import java.util.regex.PatternSyntaxException;
 
 public class Simulation {
-    // class that is responsible for reading item data and filling up the rockets.
-    private ArrayList<Item> allItemsPhase1;
-    private ArrayList<Item> allItemsPhase2;
 
     File f1 = new File("phase-1.txt");
     File f2 = new File("phase-2.txt");
 
     Simulation() {
-        allItemsPhase1 = new ArrayList();
-        allItemsPhase2 = loadItem(2);
-        loadU1(allItemsPhase1);
-//        loadU2(allItemsPhase1);
-        loadU1(allItemsPhase2);
+
+        double costsU1, costsU2 = 0;
+        // class that is responsible for reading item data and filling up the rockets.
+        ArrayList<Item> allItemsPhase1 = loadItem(1);
+        ArrayList<Item> allItemsPhase2 = loadItem(2);
+        System.out.println("------------ Rocket U1 loading -----------------");
+        ArrayList<Rocket> rocketU1Ph1 = loadU1(allItemsPhase1);
+        System.out.println("------------ Rocket U2 loading -----------------");
+        ArrayList<Rocket> rocketU1Ph2 = loadU1(allItemsPhase2);
+        System.out.println("------------------------------------------------");
+
+        //       loadU1(allItemsPhase1);
+        //       loadU1(allItemsPhase2);
 //        loadU2(allItemsPhase2);
+       costsU1 = runSimulation(rocketU1Ph1);
+       costsU1 += runSimulation(rocketU1Ph2);
+        System.out.println("Budget for U1: $" + (long) costsU1);
 
     }
 
@@ -34,10 +42,9 @@ public class Simulation {
         ArrayList<Item> all_Items = new ArrayList<>();
 
         try {
-            if (phase==1) {
+            if (phase == 1) {
                 scanner = new Scanner(f1);
-            }
-            else {
+            } else {
                 scanner = new Scanner(f2);
             }
             while (scanner.hasNextLine()) {
@@ -46,7 +53,7 @@ public class Simulation {
                 if (s.length == 2) {
                     Item item = new Item();
                     item.setName(s[0]);
-                    item.setWeight(Integer.valueOf(s[1]));
+                    item.setWeight(Integer.parseInt(s[1]));
                     all_Items.add(item);
                 } else {
                     System.out.println("Wrong file format!");
@@ -61,7 +68,7 @@ public class Simulation {
         return all_Items;
     }
 
-    public ArrayList loadU1(ArrayList<Item> itemsU1) {
+    public ArrayList<Rocket> loadU1(ArrayList<Item> itemsU1) {
         // this method takes the ArrayList of Items returned from loadItems and starts creating U1 rockets.
         // It first tries to fill up 1 rocket with as many items as possible before creating a new rocket object
         // and filling that one until all items are loaded. The method then returns the ArrayList of those U1
@@ -87,7 +94,7 @@ public class Simulation {
         return rocketArrayList;
     }
 
-    public ArrayList loadU2(ArrayList<Item> itemsU2) {
+    public ArrayList<Rocket> loadU2(ArrayList<Item> itemsU2) {
         // this method also takes the ArrayList of Items and starts creating U2 rockets and filling them with
         // those items the same way as with U1 until all items are loaded. The method then returns the ArrayList of
         // those U2 rockets that are fully loaded.
@@ -111,12 +118,32 @@ public class Simulation {
         return rocketArrayList;
     }
 
-    public void runSimulation() {
+    public double runSimulation(ArrayList<Rocket> rocketsLists) {
         //this method takes an ArrayList of Rockets and calls launch and land methods for each of the rockets
         // in the ArrayList. Every time a rocket explodes or crashes (i.e if launch or land return false) it
         // will have to send that rocket again. All while keeping track of the total budget required to send
         // each rocket safely to Mars. runSimulation then returns the total budget required to send all rockets
         // (including the crashed ones).
 
+        double rocketsCosts = 0;
+
+        for (Rocket rocket : rocketsLists) {
+            boolean launchOK = rocket.launch();
+            boolean landOK = rocket.land();
+            rocketsCosts += rocket.getCostDollars();
+
+            if (landOK && launchOK) {
+                System.out.println("Expedition succed!");
+
+            }
+            else {
+                System.out.println("Expedition failed!");
+                rocketsCosts += rocket.getCostDollars();
+            }
+
+        }
+        System.out.println("Cost of Rockets U1: $" + ( long) rocketsCosts);
+
+        return rocketsCosts;
     }
 }
