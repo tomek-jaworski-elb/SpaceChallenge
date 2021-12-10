@@ -33,10 +33,10 @@ public class Simulation {
         double costsU2p1 = runSimulation(rocketU2Ph1);
         double costsU2p2 = runSimulation(rocketU2Ph2);
 
-        System.out.println("Budget for U1: $" + (long) (costsU1p1 + costsU1p2) + " (" + (long) costsU1p1
-                + ", " + (long) costsU1p2 + ")");
-        System.out.println("Budget for U2: $" + (long) (costsU2p1 + costsU2p2) + " (" + (long) costsU2p1
-                + ", " + (long) costsU2p2 + ")");
+        System.out.println("Budget for U1: $" + (long) (costsU1p1 + costsU1p2) + " (Phase1 $" + (long) costsU1p1
+                + ", Phase2: $" + (long) costsU1p2 + ")");
+        System.out.println("Budget for U2: $" + (long) (costsU2p1 + costsU2p2) + " (Phase1 $" + (long) costsU2p1
+                + ", Phase2: $" + (long) costsU2p2 + ")");
     }
 
     private ArrayList<Item> loadItem(int phase) {
@@ -68,8 +68,13 @@ public class Simulation {
                     System.out.println("Wrong file format!");
                 }
             }
-        } catch (FileNotFoundException | PatternSyntaxException exception) {
-            exception.printStackTrace();
+        } catch (FileNotFoundException exception) {
+            if (phase == 1)
+                System.out.println("File nor found: " + f1.getName());
+            else
+                System.out.println("File nor found: " + f2.getName());
+        } catch (PatternSyntaxException exception) {
+            System.out.println("Error:" + exception);
         }
 
         return all_Items;

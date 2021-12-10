@@ -51,10 +51,6 @@ public class Rocket implements SpaceShip {
         this.costDollars = costDollars;
     }
 
-    public int getWeightKgs() {
-        return weightKgs;
-    }
-
     public void setWeightKgs(int weightKgs) {
         this.weightKgs = weightKgs;
     }
@@ -63,16 +59,8 @@ public class Rocket implements SpaceShip {
         return costDollars;
     }
 
-    public int getMaxWeightWithCargoKgs() {
-        return maxWeightWithCargoKgs;
-    }
-
     public int getCurrentWeightKgs() {
         return currentWeightKgs;
-    }
-
-    public void setCurrentWeightKgs(int currentWeightKgs) {
-        this.currentWeightKgs = currentWeightKgs;
     }
 
     public int getMaxCargoWeightKgs() {

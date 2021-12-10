@@ -14,8 +14,6 @@ public class U2 extends Rocket {
 
         double chanceOfLand = 0.08 * getCurrentWeightKgs() / getMaxCargoWeightKgs();
         double randomNumber = Math.random();
-        //           System.out.println("U1 land OK!");
-        //            System.out.println("U1 land OK!");
          return !(chanceOfLand >= randomNumber);
     }
 
@@ -25,8 +23,6 @@ public class U2 extends Rocket {
         // a random number using the probability equation for each.
         double chanceOfLaunch = 0.04 * getCurrentWeightKgs() / getMaxCargoWeightKgs();
         double randomNumber = Math.random();
-        //           System.out.println("U1 launch OK!");
-        //           System.out.println("U1 launch FAIL!");
 
         return !(chanceOfLaunch >= randomNumber);
     }
