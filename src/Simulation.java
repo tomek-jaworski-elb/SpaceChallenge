@@ -62,7 +62,12 @@ public class Simulation {
                 if (s.length == 2) {
                     Item item = new Item();
                     item.setName(s[0]);
-                    item.setWeight(Integer.parseInt(s[1]));
+                    try {
+                        item.setWeight(Integer.parseInt(s[1]));
+                    }
+                    catch (NumberFormatException e) {
+                        System.out.println("Error - it's not Integer!: " + e);
+                    }
                     all_Items.add(item);
                 } else {
                     System.out.println("Wrong file format!");
