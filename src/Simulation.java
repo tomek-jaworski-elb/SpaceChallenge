@@ -143,8 +143,10 @@ public class Simulation {
         // (including the crashed ones).
 
         double rocketsCosts = 0;
+        Rocket rocket;
 
-        for (Rocket rocket : rocketsLists) {
+        for (int i=0; i<rocketsLists.size();i++) {
+            rocket = rocketsLists.get(i);
             boolean launchOK = rocket.launch();
             boolean landOK = rocket.land();
             rocketsCosts += rocket.getCostDollars();
@@ -154,7 +156,8 @@ public class Simulation {
 
             } else {
                 System.out.println("Expedition failed!");
-                rocketsCosts += rocket.getCostDollars();
+ //               rocketsCosts += rocket.getCostDollars();
+                i--;
             }
 
         }
