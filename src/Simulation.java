@@ -155,8 +155,13 @@ public class Simulation {
                 System.out.println("Expedition succed!");
 
             } else {
-                System.out.println("Expedition failed!");
- //               rocketsCosts += rocket.getCostDollars();
+                String s = "Expedition failed ";
+                if (!landOK) {
+                    s += "on landing";
+                } else {
+                    s += "on launching";
+                }
+                System.out.println(s);
                 i--;
             }
 
