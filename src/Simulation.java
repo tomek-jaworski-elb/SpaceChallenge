@@ -64,8 +64,7 @@ public class Simulation {
                     item.setName(s[0]);
                     try {
                         item.setWeight(Integer.parseInt(s[1]));
-                    }
-                    catch (NumberFormatException e) {
+                    } catch (NumberFormatException e) {
                         System.out.println("Error - it's not Integer!: " + e);
                     }
                     all_Items.add(item);
@@ -90,7 +89,7 @@ public class Simulation {
         // It first tries to fill up 1 rocket with as many items as possible before creating a new rocket object
         // and filling that one until all items are loaded. The method then returns the ArrayList of those U1
         // rockets that are fully loaded.
-        System.out.println(itemsU1.size());
+        System.out.println("Items to load" + itemsU1.size());
         ArrayList<Rocket> rocketArrayList = new ArrayList<>();
         Rocket rocket = new U1();
         for (Item i : itemsU1) {
@@ -115,7 +114,7 @@ public class Simulation {
         // this method also takes the ArrayList of Items and starts creating U2 rockets and filling them with
         // those items the same way as with U1 until all items are loaded. The method then returns the ArrayList of
         // those U2 rockets that are fully loaded.
-        System.out.println(itemsU2.size());
+        System.out.println("Items to load: "+itemsU2.size());
         ArrayList<Rocket> rocketArrayList = new ArrayList<>();
         Rocket rocket = new U2();
         for (Item i : itemsU2) {
@@ -145,7 +144,7 @@ public class Simulation {
         double rocketsCosts = 0;
         Rocket rocket;
 
-        for (int i=0; i<rocketsLists.size();i++) {
+        for (int i = 0; i < rocketsLists.size(); i++) {
             rocket = rocketsLists.get(i);
             boolean launchOK = rocket.launch();
             boolean landOK = rocket.land();
